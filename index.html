@@ -1,52 +1,66 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Brawlhalla Reflex Test</title>
-<style>
-body{
-background:black;
-color:white;
-text-align:center;
-font-family:Arial;
-}
+    <meta charset="UTF-8">
+    <title>Brawlhalla Reflex Test</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden; /* Taşmaları engellemek için */
+            height: 100vh;
+        }
 
-#box{
-width:120px;
-height:120px;
-background:lime;
-position:absolute;
-cursor:pointer;
-}
-</style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: lime;
+            position: absolute;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Brawlhalla Reflex Test</h1>
-<p>Kareye bas!</p>
+    <h1 id="title">Brawlhalla Reflex Test</h1>
+    <p id="desc">Yeşil kareye en hızlı şekilde bas!</p>
 
-<div id="box"></div>
+    <div id="box"></div>
 
-<audio id="scream" src="https://www.myinstants.com/media/sounds/movie_1.mp3"></audio>
+    <audio id="scream" src="https://www.myinstants.com/media/sounds/movie_1.mp3"></audio>
 
-<script>
+    <script>
+        let box = document.getElementById("box");
+        let scream = document.getElementById("scream");
 
-let box=document.getElementById("box")
-let scream=document.getElementById("scream")
+        // Kutuyu rastgele konuma gönder (Ekran sınırları içinde)
+        function moveBox() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 150) + 50;
+            box.style.left = x + "px";
+            box.style.top = y + "px";
+        }
 
-box.style.top=Math.random()*400+"px"
-box.style.left=Math.random()*600+"px"
+        moveBox();
 
-box.onclick=function(){
-
-document.body.innerHTML="<img src='https://i.imgur.com/Z6XK3YF.jpg' style='width:100%;height:100%'>"
-
-scream.play()
-
-}
-
-</script>
+        box.onclick = function() {
+            // Jumpscare ekranı
+            document.body.innerHTML = "<img src='scary%20teeth.jpg'>";
+            
+            // Sesi çal (Tarayıcı engellemezse çalışacaktır)
+            scream.play().catch(e => console.log("Ses çalınamadı, etkileşim gerekiyor."));
+        };
+    </script>
 
 </body>
 </html>
